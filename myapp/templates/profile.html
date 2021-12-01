@@ -1,0 +1,110 @@
+{% extends 'header.html'%}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Timups</title>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+  </div>
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <div class="heading_container">
+              <h2>
+                Profile
+              </h2>
+              {% if msg1 %}
+                <h6 style="color:green;">{{msg1}}</h6>
+              {% else %}
+                <h6 style="color:red;">{{msg2}}</h6>
+              {% endif %}
+            </div>
+            <form action="{% url 'profile' %}" method="POST">
+              {% csrf_token %}
+              <div>
+                <input type="text" placeholder="First Name" name="fname" value="{{user.fname}}" />
+              </div>
+              <div>
+                <input type="text" placeholder="Last Name" name="lname"value="{{user.lname}}"  />
+                
+              </div>
+              <div>
+                <span id="email_error" style="color:red;"></span>
+                <input type="email" placeholder="Email" name="email" id="email"value="{{user.email}}" readonly /> 
+              </div>
+              <div>
+                <input type="text" placeholder="Phone number" name="mobile"value="{{user.mobile}}" />
+              </div>
+              <div>
+                <textarea name="address" placeholder="Address" rows="5" cols="36">{{user.address}}</textarea>
+              </div>
+              <div class="d-flex ">
+                <button type="">
+                  <a href="{% url 'change_password' %}" style="color: white;">CHANGE PASSWORD</a>
+                </button>
+              </div>
+              <div class="d-flex ">
+                <button type="submit">
+                  UPDATE PROFILE
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{% static 'images/contact-img.jpg'%}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+  <script type="text/javascript">
+    $("#email").change(function() {
+      var email = $(this).val();
+
+      $.ajax({
+        url:'/validate_email/',
+        data:{
+          'email':email
+        },
+        datatype:'json',
+        success:function(data){
+          if (data.is_email){
+            document.getElementById("email_error").innerHTML="Email Already Registered";
+          }
+          else{document.getElementById("email_error").innerHTML=""}
+        }
+      });
+    });
+  </script>
+
+  
+</body>
+
+</html>
+
+{% endblock %}

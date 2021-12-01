@@ -1,0 +1,85 @@
+{% extends 'seller_header.html'%}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Timups</title>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+  </div>
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <div class="heading_container">
+              <h2>
+                Edit Watch
+              </h2>
+              {% if msg1 %}
+                <h6 style="color:green;">{{msg1}}</h6>
+              {% else %}
+                <h6 style="color:red;">{{msg2}}</h6>
+              {% endif %}
+            </div>
+            <form action="{% url 'watch_edit' pk=watch.pk %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div>
+                <input type="text" placeholder="Model Brand" name="watch_brand" value="{{watch.watch_brand}}" readonly />
+              </div>
+              <br>
+              <div>
+                <input type="text" placeholder="Model No." name="watch_model" value="{{watch.watch_model}}" />
+              </div>
+              <div>
+                <textarea name="watch_desc" placeholder="Watch Description" rows="5" cols="66">{{watch.watch_desc}}</textarea>
+              </div>
+              <div>
+                <input type="text" placeholder="Price" name="watch_price" value="{{watch.watch_price}}" />
+              </div>
+              <div>
+                <input type="file" name="watch_image" />
+              </div>
+              <div class="d-flex ">
+                <button type="submit">
+                  UPDATE WATCH
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{{watch.watch_image.url}}" alt="" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+  
+</body>
+
+</html>
+
+{% endblock %}

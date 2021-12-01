@@ -1,0 +1,219 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Timups</title>
+	<link rel="shortcut icon" href="{% static 'images/favicon.png'%}" type="image/x-icon">
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" />
+	<!--owl slider stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css'%}" />
+
+	<!-- font awesome style -->
+	<link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet" />
+
+	<!-- Custom styles for this template -->
+	<link href="{% static 'css/style.css'%}" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="{% static 'css/responsive.css'%}" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+	<!-- header section strats -->
+	<header class="header_section">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg custom_nav-container ">
+				<a class="navbar-brand" href="index.html">
+					<span>
+						Timups
+					</span>
+				</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class=""> </span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'watches' %}"> Watches </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'about' %}"> About </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+						</li>
+						{% if request.session.email %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'logout' %}">Logout({{request.session.fname}})</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'myorder' %}">My Order</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'login' %}">Log In</a>
+						</li>
+						{% endif %}
+
+					</ul>
+					<div class="user_option-box">
+						<a href="{% url 'mywishlist' %}">
+							{% if request.session.wishlist_count %}
+							<i class="fa fa-heart" aria-hidden="true"
+								style="color: red;">({{request.session.wishlist_count}})</i>
+							{% else %}
+							<i class="fa fa-heart" aria-hidden="true" style="color: black;"></i>
+							{% endif %}
+
+						</a>
+						<a href="{% url 'mycart' %}">
+							{% if request.session.cart_count %}
+							<i class="fa fa-shopping-cart" aria-hidden="true"
+								style="color: green;">({{request.session.cart_count}})</i>
+							{% else %}
+							<i class="fa fa-shopping-cart" aria-hidden="true" style="color: black;"></i>
+							{% endif %}
+
+						</a>
+
+						<!-- <a href="{% url 'mycart' %}">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						</a> -->
+						<a href="{% url 'profile' %}">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!-- end header section -->
+	{% block content %}
+	{% endblock %}
+	<!-- footer section -->
+	<footer class="footer_section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-3 footer-col">
+					<div class="footer_detail">
+						<h4>
+							About
+						</h4>
+						<p>
+							Necessary, making this the first true generator on the Internet. It uses a dictionary of
+							over 200 Latin words, combined with
+						</p>
+						<div class="footer_social">
+							<a href="">
+								<i class="fa fa-facebook" aria-hidden="true"></i>
+							</a>
+							<a href="">
+								<i class="fa fa-twitter" aria-hidden="true"></i>
+							</a>
+							<a href="">
+								<i class="fa fa-linkedin" aria-hidden="true"></i>
+							</a>
+							<a href="">
+								<i class="fa fa-instagram" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 footer-col">
+					<div class="footer_contact">
+						<h4>
+							Reach at..
+						</h4>
+						<div class="contact_link_box">
+							<a href="">
+								<i class="fa fa-map-marker" aria-hidden="true"></i>
+								<span>
+									Location
+								</span>
+							</a>
+							<a href="">
+								<i class="fa fa-phone" aria-hidden="true"></i>
+								<span>
+									Call +91 9327839162
+								</span>
+							</a>
+							<a href="">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<span>
+									vishnudjangotest@gmail.com
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 footer-col">
+					<div class="footer_contact">
+						<h4>
+							Subscribe
+						</h4>
+						<form action="#">
+							<input type="text" placeholder="Enter email" />
+							<button type="submit">
+								Subscribe
+							</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 footer-col">
+					<div class="map_container">
+						<div class="map">
+							<div id="googleMap"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-info">
+				<p>
+					&copy; <span id="displayYear"></span> All Rights Reserved By Vishnu Prabhu .
+				</p>
+			</div>
+		</div>
+	</footer>
+	<!-- footer section -->
+
+	<!-- jQery -->
+	<script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+	<!-- popper js -->
+	<script src="{% static 'js/popper.min.js'%}"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+		</script>
+	<!-- bootstrap js -->
+	<script src="{% static 'js/bootstrap.js'%}"></script>
+	<!-- owl slider -->
+	<script src="{% static 'owl.carousel.min.js'%}">
+	</script>
+	<!-- custom js -->
+	<script src="{% static 'js/custom.js'%}"></script>
+	<!-- Google Map -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+	<!-- End Google Map -->
+	<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+</body>
+
+</html>
